@@ -153,3 +153,28 @@ button:focus-visible {
 button:hover {
   opacity: 0.95;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #eee;
+  }
+
+  main {
+    background-color: #1e1e1e;
+  }
+
+  .api-key-banner {
+    background-color: #332a22;
+  }
+
+  input {
+    background-color: #333;
+    border-color: #555;
+    color: #eee;
+  }
+
+  button {
+    --accent-color: #4285F4;
+  }
+}
