@@ -1,5 +1,5 @@
 import express from 'express';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import 'dotenv/config';
 import QRCode from 'qrcode';
 
@@ -17,7 +17,7 @@ app.post('/api/gemini', async (req, res) => {
       console.error('API key not found. Make sure to set the API_KEY environment variable.');
       return res.status(500).json({ error: 'API key not configured on the server.' });
     }
-    const genAI = new GoogleGenAI(process.env.API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     if (!prompt) {
@@ -27,11 +27,10 @@ app.post('/api/gemini', async (req, res) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = await response.text();
-
     res.json({ text });
   } catch (error) {
-    console.error('An error occurred:', JSON.stringify(error, null, 2));
-    res.status(500).json({ error: 'Failed to generate content', details: error });
+    console.error('An error occurred:', error);
+    res.status(500).json({ error: 'Failed to generate content', details: error.message });
   }
 });
 

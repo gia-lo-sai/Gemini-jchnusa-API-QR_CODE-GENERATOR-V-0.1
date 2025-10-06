@@ -15,7 +15,7 @@ form.onsubmit = async (ev) => {
     const prompt = `Please summarize the following contact information:\n\n${JSON.stringify(data, null, 2)}`;
 
     // Call the server-side endpoint
-    const response = await fetch('/api/gemini', {
+    const geminiResponse = await fetch('/api/gemini', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -23,7 +23,16 @@ form.onsubmit = async (ev) => {
       body: JSON.stringify({ prompt })
     });
 
-    const { text } = await response.json();
+    if (!geminiResponse.ok) {
+      const errorData = await geminiResponse.json();
+      throw new Error(`${errorData.error}: ${errorData.details || 'No additional details provided.'}`);
+    }
+
+    const { text } = await geminiResponse.json();
+
+    if (!text) {
+      throw new Error('Received empty response from Gemini API');
+    }
 
     // Read from the stream and interpret the output as markdown
     let md = new MarkdownIt();
@@ -38,12 +47,17 @@ form.onsubmit = async (ev) => {
       body: JSON.stringify({ text })
     });
 
+    if (!qrCodeResponse.ok) {
+      const errorData = await qrCodeResponse.json();
+      throw new Error(errorData.error || 'Failed to generate QR code');
+    }
+
     const { qrCodeDataUrl } = await qrCodeResponse.json();
     const qrCodeImg = document.createElement('img');
     qrCodeImg.src = qrCodeDataUrl;
     output.appendChild(qrCodeImg);
 
   } catch (e) {
-    output.innerHTML += '<hr>' + e;
+    output.innerHTML += `<hr>${e.message}`;
   }
 };
