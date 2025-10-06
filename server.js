@@ -13,6 +13,10 @@ app.post('/api/gemini', async (req, res) => {
   const { prompt } = req.body;
 
   try {
+    if (!process.env.API_KEY) {
+      console.error('API key not found. Make sure to set the API_KEY environment variable.');
+      return res.status(500).json({ error: 'API key not configured on the server.' });
+    }
     const genAI = new GoogleGenAI(process.env.API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
@@ -22,7 +26,7 @@ app.post('/api/gemini', async (req, res) => {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response.text();
+    const text = await response.text();
 
     res.json({ text });
   } catch (error) {
