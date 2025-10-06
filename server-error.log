@@ -45,3 +45,53 @@ Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@google/generative-ai' import
 
 Node.js v20.18.1
 [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+node:internal/modules/esm/resolve:854
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@google/generative-ai' imported from /home/user/gemini-jchnusa-api/server.js
+    at packageResolve (node:internal/modules/esm/resolve:854:9)
+    at moduleResolve (node:internal/modules/esm/resolve:927:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1169:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:542:12)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:510:25)
+    at ModuleLoader.getModuleJob (node:internal/modules/esm/loader:239:38)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:96:40)
+    at link (node:internal/modules/esm/module_job:95:36) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v20.18.1
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Server listening at http://localhost:3000
+An error occurred: GoogleGenerativeAIFetchError: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 441263567973 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=441263567973 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"containerInfo":"441263567973","consumer":"projects/441263567973","activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=441263567973","serviceTitle":"Generative Language API","service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 441263567973 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=441263567973 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=441263567973"}]}]
+    at handleResponseNotOk (file:///home/user/gemini-jchnusa-api/node_modules/@google/generative-ai/dist/index.mjs:432:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (file:///home/user/gemini-jchnusa-api/node_modules/@google/generative-ai/dist/index.mjs:401:9)
+    at async generateContent (file:///home/user/gemini-jchnusa-api/node_modules/@google/generative-ai/dist/index.mjs:865:22)
+    at async file:///home/user/gemini-jchnusa-api/server.js:27:20 {
+  status: 403,
+  statusText: 'Forbidden',
+  errorDetails: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+      reason: 'SERVICE_DISABLED',
+      domain: 'googleapis.com',
+      metadata: [Object]
+    },
+    {
+      '@type': 'type.googleapis.com/google.rpc.LocalizedMessage',
+      locale: 'en-US',
+      message: 'Generative Language API has not been used in project 441263567973 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=441263567973 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.'
+    },
+    { '@type': 'type.googleapis.com/google.rpc.Help', links: [Array] }
+  ]
+}
