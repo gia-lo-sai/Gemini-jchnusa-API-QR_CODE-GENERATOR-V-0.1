@@ -14,9 +14,9 @@
     "@google/generative-ai": "^0.24.1",
     "base64-js": "^1.5.1",
     "dotenv": "^17.2.3",
-    "express": "^4.19.2",
+    "express": "^5.1.0",
     "firebase": "^12.3.0",
-    "markdown-it": "^13.0.2",
+    "markdown-it": "^14.1.0",
     "qrcode": "^1.5.4"
   },
   "devDependencies": {

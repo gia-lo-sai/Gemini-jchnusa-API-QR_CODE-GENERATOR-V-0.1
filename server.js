@@ -4,7 +4,7 @@ import 'dotenv/config';
 import QRCode from 'qrcode';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -18,8 +18,7 @@ app.post('/api/gemini', async (req, res) => {
       return res.status(500).json({ error: 'API key not configured on the server.' });
     }
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-    // Corrected model name based on the list of available models
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
@@ -27,7 +26,12 @@ app.post('/api/gemini', async (req, res) => {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = await response.text();
+    
+    if (!response) {
+        return res.status(500).json({ error: 'No response from Gemini API' });
+    }
+
+    const text = response.candidates[0].content.parts[0].text;
     res.json({ text });
   } catch (error) {
     console.error('An error occurred:', error);

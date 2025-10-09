@@ -23,12 +23,26 @@ form.onsubmit = async (ev) => {
       body: JSON.stringify({ prompt })
     });
 
+    const geminiResultText = await geminiResponse.text();
     if (!geminiResponse.ok) {
-      const errorData = await geminiResponse.json();
-      throw new Error(`${errorData.error}: ${errorData.details || 'No additional details provided.'}`);
+      let error = 'Failed to generate content';
+      try {
+        const errorJson = JSON.parse(geminiResultText);
+        error = errorJson.error || error;
+        if(errorJson.details) {
+          error += `: ${errorJson.details}`
+        }
+      } catch (e) {
+        // Not a json response, use the raw text
+        if(geminiResultText) {
+          error = geminiResultText;
+        }
+      }
+      throw new Error(error);
     }
 
-    const { text } = await geminiResponse.json();
+    const geminiResult = JSON.parse(geminiResultText);
+    const { text } = geminiResult;
 
     if (!text) {
       throw new Error('Received empty response from Gemini API');
@@ -46,13 +60,24 @@ form.onsubmit = async (ev) => {
       },
       body: JSON.stringify({ text })
     });
-
+    
+    const qrCodeResultText = await qrCodeResponse.text();
     if (!qrCodeResponse.ok) {
-      const errorData = await qrCodeResponse.json();
-      throw new Error(errorData.error || 'Failed to generate QR code');
+      let error = 'Failed to generate QR code';
+       try {
+        const errorJson = JSON.parse(qrCodeResultText);
+        error = errorJson.error || error;
+      } catch (e) {
+        // Not a json response, use the raw text
+        if(qrCodeResultText) {
+          error = qrCodeResultText;
+        }
+      }
+      throw new Error(error);
     }
-
-    const { qrCodeDataUrl } = await qrCodeResponse.json();
+    
+    const qrCodeResult = JSON.parse(qrCodeResultText);
+    const { qrCodeDataUrl } = qrCodeResult;
     const qrCodeImg = document.createElement('img');
     qrCodeImg.src = qrCodeDataUrl;
     output.appendChild(qrCodeImg);
