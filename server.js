@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.post('/api/gemini', async (req, res) => {
-  const { prompt } = req.body;
+  const { prompt, model: modelName } = req.body;
 
   try {
     if (!process.env.API_KEY) {
@@ -18,7 +18,7 @@ app.post('/api/gemini', async (req, res) => {
       return res.status(500).json({ error: 'API key not configured on the server.' });
     }
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: modelName || "gemini-1.5-flash-latest" });
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
