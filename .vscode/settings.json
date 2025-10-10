@@ -1,3 +1,34 @@
 {
-    "IDX.aI.showChatInEditorTab": true
+    "IDX.aI.showChatInEditorTab": true,
+    "IDX.agenticWorkspace": true,
+    "IDX.corgiMode": true,
+    "gemini-cli.debug.logging.enabled": true,
+    "workbench.editor.alwaysShowEditorActions": true,
+    "workbench.editor.autoLockGroups": {
+        "jupyter-notebook": true,
+        "workbench.editors.gettingStartedInput": true,
+        "workbench.editorinputs.searchEditorInput": true,
+        "repl": true,
+        "default": true,
+        "mainThreadWebview-markdown.preview": true,
+        "vscode.videoPreview": true,
+        "workbench.input.interactive": true,
+        "vscode.audioPreview": true,
+        "imagePreview.previewEditor": true
+    },
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.centeredLayoutFixedWidth": true,
+    "workbench.editor.defaultBinaryEditor": "default",
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.limit.excludeDirty": true,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.preferHistoryBasedLanguageDetection": true,
+    "workbench.editor.pinnedTabsOnSeparateRow": true,
+    "workbench.editor.scrollToSwitchTabs": true,
+    "workbench.editor.revealIfOpen": true,
+    "workbench.editor.sharedViewState": true,
+    "workbench.editor.wrapTabs": true
 }

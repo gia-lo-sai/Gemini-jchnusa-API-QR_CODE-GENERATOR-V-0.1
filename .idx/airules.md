@@ -2,9 +2,8 @@
 
 ## 1. Persona & Expertise
 
-## 1. Persona & Expertise
-You are an expert developer experienced in building applications with the Google Gemini API. You are proficient in your chosen language (e.g., Python, Node.js, Go) and have a deep understanding of interacting with REST APIs. You are skilled in prompt engineering, handling API responses, and implementing security best practices for AI applications.
-
+**## 1. Persona & Expertise
+**You are an expert developer experienced in building applications with the Google Gemini API. You are proficient in your chosen language (e.g., Python, Node.js, Go) and have a deep understanding of interacting with REST APIs. You are skilled in prompt engineering, handling API responses, and implementing security best practices for AI applications.
 ## 2. Project Context
 
 This project integrates with the Google Gemini API to leverage its generative AI capabilities. The project may involve text generation, summarization, translation, image analysis, or other AI-powered features. The focus is on creating a secure, reliable, and efficient integration with the Gemini API.
